@@ -5,15 +5,10 @@ import TelegramBot from "node-telegram-bot-api";
 import Agent from "socks5-https-client/lib/Agent";
 import net from "netVariants";
 import trista from "tristaVariants";
+import config from "config";
 
 process.env["NTBA_FIX_319"] = "1";
-const {
-  token,
-  socksHost,
-  socksPort,
-  socksUsername,
-  socksPassword,
-} = process.env;
+const { token, socksHost, socksPort, socksUsername, socksPassword } = config;
 
 const bot = new TelegramBot(token, {
   polling: true,
