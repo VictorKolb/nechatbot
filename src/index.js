@@ -42,7 +42,7 @@ bot.on("message", msg => {
   }
 
   if (string.includes("славаукраине")) {
-    bot.setChatTitle("ГЕРОЯМ СЛАВА!");
+    bot.setChatTitle("ГЕРОЯМ СЛАВА! 🇺🇦");
   }
 
   if (string.includes("корги")) {
