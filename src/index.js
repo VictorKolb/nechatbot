@@ -48,7 +48,7 @@ bot.on("message", msg => {
   if (string.includes("корги")) {
     fetch("https://dog.ceo/api/breed/corgi/cardigan/images/random")
       .then(data => data.json())
-      .then(data => sendMessage(data.message.replace(`\/`, "")))
+      .then(data => sendMessage(data.message.replace(/\\/g, "")))
       .catch(e => console.error(e));
   }
 
