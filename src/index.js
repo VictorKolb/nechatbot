@@ -41,6 +41,13 @@ bot.on("message", msg => {
     bot.setChatTitle(chatId, text);
   }
 
+  if (string.includes("корги")) {
+    fetch("https://dog.ceo/api/breed/corgi/cardigan/images/random")
+      .then(data => data.json())
+      .then(data => sendMessage(data.message.replace(`\/`, "")))
+      .catch(e => console.error(e));
+  }
+
   if (
     string.includes("сиба") ||
     string.includes("сибу") ||
