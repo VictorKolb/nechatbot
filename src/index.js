@@ -6,6 +6,7 @@ import Agent from "socks5-https-client/lib/Agent";
 import net from "netVariants";
 import trista from "tristaVariants";
 import config from "config";
+import { hatespeach } from "constants";
 
 process.env["NTBA_FIX_319"] = "1";
 const { token, socksHost, socksPort, socksUsername, socksPassword } = config;
@@ -65,12 +66,7 @@ bot.on("message", msg => {
       .catch(e => console.error(e));
   }
 
-  if (
-    string.includes("пидор") ||
-    string.includes("пидр") ||
-    string.includes("нигер") ||
-    string.includes("нигга")
-  ) {
+  if (new RegExp(hatespeach.join("|")).test(string)) {
     sendMessage("это хейтспич приятель");
   }
 
