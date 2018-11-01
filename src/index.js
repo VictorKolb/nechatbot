@@ -41,6 +41,10 @@ bot.on("message", msg => {
     bot.setChatTitle(chatId, text);
   }
 
+  if (string.includes("славаукраине")) {
+    bot.setChatTitle("ГЕРОЯМ СЛАВА!");
+  }
+
   if (string.includes("корги")) {
     fetch("https://dog.ceo/api/breed/corgi/cardigan/images/random")
       .then(data => data.json())
