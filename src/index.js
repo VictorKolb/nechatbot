@@ -33,7 +33,7 @@ bot.on("message", msg => {
   const string = text.replace(/[^\wа-я]+/gi, "").toLowerCase();
   const { id: chatId } = chat;
 
-  function sendMessage(text) {
+  function sendMessage(text: string) {
     bot.sendMessage(chatId, text, { reply_to_message_id: message_id });
   }
 
@@ -42,7 +42,7 @@ bot.on("message", msg => {
   }
 
   if (string.includes("славаукраине")) {
-    bot.setChatTitle("ГЕРОЯМ СЛАВА! 🇺🇦");
+    sendMessage("ГЕРОЯМ СЛАВА! 🇺🇦");
   }
 
   if (string.includes("корги")) {
