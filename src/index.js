@@ -43,6 +43,7 @@ bot.on("message", msg => {
 
   if (
     string.includes("сиба") ||
+    string.includes("сибу") ||
     string.includes("шиба") ||
     string.includes("сибушка") ||
     string.includes("шибушка")
