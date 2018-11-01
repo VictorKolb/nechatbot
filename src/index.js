@@ -1,12 +1,8 @@
 // @flow
-
-import fetch from "node-fetch";
 import TelegramBot from "node-telegram-bot-api";
 import Agent from "socks5-https-client/lib/Agent";
-import net from "netVariants";
-import trista from "tristaVariants";
 import config from "config";
-import { hatespeach } from "constants";
+import { triggers, net } from "constants.js";
 
 process.env["NTBA_FIX_319"] = "1";
 const { token, socksHost, socksPort, socksUsername, socksPassword } = config;
@@ -24,72 +20,40 @@ const bot = new TelegramBot(token, {
   },
 });
 
-function getRandomNumber(max: number, min: number): number {
+export function getRandomNumber(max: number, min: number): number {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-bot.on("message", msg => {
+bot.on("message", async msg => {
   // bot.sendMessage(168224148, JSON.stringify(msg));
   const { message_id, chat, text } = msg;
-  const string = text.replace(/[^\wа-я]+/gi, "").toLowerCase();
-  const { id: chatId } = chat;
+  if (text) {
+    const string = text.replace(/[^\wа-я]+/gi, "").toLowerCase();
+    const { id: chatId } = chat;
 
-  function sendMessage(text: string) {
-    bot.sendMessage(chatId, text, { reply_to_message_id: message_id });
-  }
+    function sendMessage(text: string) {
+      bot.sendMessage(chatId, text, { reply_to_message_id: message_id });
+    }
 
-  if (string.includes("етонечат")) {
-    bot.setChatTitle(chatId, text);
-  }
+    if (string.includes("етонечат")) {
+      bot.setChatTitle(chatId, text);
+    }
 
-  if (string.includes("славаукраине")) {
-    sendMessage("ГЕРОЯМ СЛАВА! 🇺🇦");
-  }
+    if (string.slice(-3) === "нет") {
+      sendMessage(net[getRandomNumber(0, net.length)]);
+    }
 
-  if (string.includes("корги")) {
-    fetch("https://dog.ceo/api/breed/corgi/cardigan/images/random")
-      .then(data => data.json())
-      .then(data => sendMessage(data.message.replace(/\\/g, "")))
-      .catch(e => console.error(e));
-  }
+    for (const [variants, func] of triggers) {
+      if (new RegExp(variants.join("|")).test(string)) {
+        sendMessage(await func());
+        return;
+      }
+    }
 
-  if (
-    string.includes("сиба") ||
-    string.includes("сибу") ||
-    string.includes("шиба") ||
-    string.includes("сибушка") ||
-    string.includes("шибушка")
-  ) {
-    fetch("http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=false")
-      .then(data => data.json())
-      .then(data => sendMessage(data[0]))
-      .catch(e => console.error(e));
-  }
-
-  if (new RegExp(hatespeach.join("|")).test(string)) {
-    sendMessage("это хейтспич приятель");
-  }
-
-  if (string.includes("челыбишься") || string.includes("чолыбишсо")) {
-    sendMessage("весело же");
-  }
-
-  if (string.includes("триста")) {
-    sendMessage(trista[getRandomNumber(0, trista.length)]);
-  }
-
-  if (string.includes("пизда")) {
-    sendMessage("а давайте не материться");
-    return;
-  }
-
-  //да — английская А
-  if (string.slice(-2) === "да" || string.slice(-2) === "дa") {
-    sendMessage("пизда");
-  }
-
-  if (string.slice(-3) === "нет") {
-    sendMessage(net[getRandomNumber(0, net.length)]);
+    //да — английская А
+    if (string.slice(-2) === "да" || string.slice(-2) === "дa") {
+      sendMessage("пизда");
+    }
   }
 });
 
