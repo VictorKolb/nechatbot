@@ -5,6 +5,7 @@ const dogUrls = {
   toy: "https://dog.ceo/api/breed/terrier/toy/images/random",
   pug: "https://dog.ceo/api/breed/pug/images/random",
   shiba: "http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=false",
+  randomDog: "https://dog.ceo/api/breeds/image/random",
 };
 
 export async function getDog(type) {

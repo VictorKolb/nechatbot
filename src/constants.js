@@ -4,6 +4,27 @@ import { getRandomNumber } from "index";
 const hateSpeech = ["пидор", "пидр", "нигер", "нигга"];
 const shiba = ["сиба", "сибу", "шиба", "сибушка", "шибушка", "шибой"];
 const corgi = ["корги", "коржик"];
+const randomDog = [
+  "песель",
+  "пёсель",
+  "собака",
+  "пёс",
+  "пес",
+  "пёса",
+  "догич",
+  "догислав",
+  "дог",
+  "собак",
+  "собакен",
+  "собакич",
+  "догислав",
+  "собакевич",
+  "пепс",
+  "догос",
+  "доггос",
+  "доггер",
+  "догич",
+];
 export const net = [
   "минет",
   "омлет",
@@ -43,6 +64,7 @@ export const triggers = [
   [hateSpeech, () => "это хейтспич приятель"],
   [corgi, async () => await getDog("corgi")],
   [shiba, async () => await getDog("shiba")],
+  [randomDog, async () => await getDog("randomDog")],
   [["той"], async () => await getDog("toy")],
   [["мопс"], async () => await getDog("pug")],
   [["триста"], () => trista[getRandomNumber(0, trista.length)]],
