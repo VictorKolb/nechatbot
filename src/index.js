@@ -46,3 +46,10 @@ bot.on("message", async msg => {
 });
 
 bot.sendMessage(168224148, "nechatbot запущен успешно");
+
+require("http")
+  .createServer()
+  .listen(process.env.PORT || 5000)
+  .on("request", function(req, res) {
+    res.json("ok");
+  });
