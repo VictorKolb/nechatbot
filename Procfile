@@ -1,1 +1,1 @@
-web: yarn prod && pm2 start build/app.js
+web: yarn prod && node build/app.js
