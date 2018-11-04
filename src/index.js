@@ -1,11 +1,23 @@
 // @flow
 import TelegramBot from "node-telegram-bot-api";
+import Agent from "socks5-https-client/lib/Agent";
+import config from "config";
 import { triggers, net } from "constants.js";
 
 process.env["NTBA_FIX_319"] = "1";
+const { token, socksHost, socksPort, socksUsername, socksPassword } = config;
 
-const bot = new TelegramBot(process.env["BOT_TOKEN"], {
+const bot = new TelegramBot(token, {
   polling: true,
+  request: {
+    agentClass: Agent,
+    agentOptions: {
+      socksHost,
+      socksPort,
+      socksUsername,
+      socksPassword,
+    },
+  },
 });
 
 export function getRandomNumber(max: number, min: number): number {
@@ -46,10 +58,3 @@ bot.on("message", async msg => {
 });
 
 bot.sendMessage(168224148, "nechatbot запущен успешно");
-
-require("http")
-  .createServer()
-  .listen(process.env.PORT || 5000)
-  .on("request", function(req, res) {
-    res.json("ok");
-  });
