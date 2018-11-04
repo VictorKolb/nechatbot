@@ -1,2 +1,1 @@
-web: yarn prod
-# web: node build/app.js
+web: yarn prod && node build/app.js
