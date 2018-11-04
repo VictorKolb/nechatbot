@@ -1,23 +1,11 @@
 // @flow
 import TelegramBot from "node-telegram-bot-api";
-import Agent from "socks5-https-client/lib/Agent";
-import config from "config";
 import { triggers, net } from "constants.js";
 
 process.env["NTBA_FIX_319"] = "1";
-const { token, socksHost, socksPort, socksUsername, socksPassword } = config;
 
-const bot = new TelegramBot(token, {
+const bot = new TelegramBot(process.env["BOT_TOKEN"], {
   polling: true,
-  request: {
-    agentClass: Agent,
-    agentOptions: {
-      socksHost,
-      socksPort,
-      socksUsername,
-      socksPassword,
-    },
-  },
 });
 
 export function getRandomNumber(max: number, min: number): number {
