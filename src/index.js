@@ -28,7 +28,7 @@ bot.on("message", async msg => {
   // bot.sendMessage(168224148, JSON.stringify(msg));
   const { message_id, chat, text } = msg;
   if (text) {
-    const string = text.replace(/[^\wа-я]+/gi, "").toLowerCase();
+    const string = text.replace(/[^\s\wа-я]+/gi, "").toLowerCase();
     const { id: chatId } = chat;
 
     function sendMessage(text: string) {
