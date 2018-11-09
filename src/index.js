@@ -35,7 +35,7 @@ bot.on("message", async msg => {
       bot.sendMessage(chatId, text, { reply_to_message_id: message_id });
     }
 
-    if (string.includes("етонечат")) {
+    if (string.includes("ет оне чат")) {
       bot.setChatTitle(chatId, text);
     }
 
