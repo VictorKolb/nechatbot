@@ -26,10 +26,17 @@ export function getRandomNumber(max: number, min: number): number {
 
 bot.on("message", async msg => {
   // bot.sendMessage(168224148, JSON.stringify(msg));
-  const { message_id, chat, text } = msg;
+  const { message_id, chat, text, new_chat_member } = msg;
+  const { id: chatId } = chat;
+
+  if (new_chat_member) {
+    bot.sendSticker(chatId, "CAADAgADTgUAAsiuFQMWhq_Msw3cOgI", {
+      reply_to_message_id: message_id,
+    });
+  }
+
   if (text) {
     const string = text.replace(/[^\s\wа-я]+/gi, "").toLowerCase();
-    const { id: chatId } = chat;
 
     function sendMessage(text: string) {
       bot.sendMessage(chatId, text, { reply_to_message_id: message_id });
