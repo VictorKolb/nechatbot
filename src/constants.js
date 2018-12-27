@@ -66,5 +66,6 @@ export const triggers = [
   [randomDog, async () => await getDog("randomDog")],
   [["той терьер"], async () => await getDog("toy")],
   [["мопс"], async () => await getDog("pug")],
+  [["хаски"], async () => await getDog("husky")],
   [["триста"], () => trista[getRandomNumber(0, trista.length)]],
 ];
