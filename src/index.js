@@ -58,7 +58,10 @@ bot.on("message", async msg => {
     }
 
     //да — английская А
-    if (string.slice(-2) === "да" || string.slice(-2) === "дa") {
+    if (
+      chatId !== -1001365498540 &&
+      (string.slice(-2) === "да" || string.slice(-2) === "дa")
+    ) {
       sendMessage("пизда");
     }
   }
