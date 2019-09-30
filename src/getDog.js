@@ -1,4 +1,4 @@
-import response from "response";
+import response from "./response";
 
 const dogUrls = {
   corgi: "https://dog.ceo/api/breed/corgi/cardigan/images/random",

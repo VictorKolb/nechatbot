@@ -1,5 +1,5 @@
-import { getDog } from "getDog";
-import { getRandomNumber } from "index";
+import { getDog } from "./getDog";
+import { getRandomNumber } from "./index";
 
 const hateSpeech = ["пидор", "пидр", "нигер", "нигга"];
 const shiba = ["сиба", "сибу", "шиба", "сибушка", "шибушка", "шибой"];

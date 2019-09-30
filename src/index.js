@@ -1,26 +1,25 @@
-// @flow
 import TelegramBot from "node-telegram-bot-api";
 import Agent from "socks5-https-client/lib/Agent";
-import config from "config";
-import { triggers, net } from "constants.js";
+import config from "./config";
+import { triggers, net } from "./constants.js";
 
 process.env["NTBA_FIX_319"] = "1";
 const { token, socksHost, socksPort, socksUsername, socksPassword } = config;
 
 const bot = new TelegramBot(token, {
   polling: true,
-  request: {
-    agentClass: Agent,
-    agentOptions: {
-      socksHost,
-      socksPort,
-      socksUsername,
-      socksPassword,
-    },
-  },
+  // request: {
+  //   agentClass: Agent,
+  //   agentOptions: {
+  //     socksHost,
+  //     socksPort,
+  //     socksUsername,
+  //     socksPassword,
+  //   },
+  // },
 });
 
-export function getRandomNumber(max: number, min: number): number {
+export function getRandomNumber(max, min) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
@@ -38,7 +37,7 @@ bot.on("message", async msg => {
   if (text) {
     const string = text.replace(/[^\s\wа-я]+/gi, "").toLowerCase();
 
-    function sendMessage(text: string) {
+    function sendMessage(text) {
       bot.sendMessage(chatId, text, { reply_to_message_id: message_id });
     }
 
